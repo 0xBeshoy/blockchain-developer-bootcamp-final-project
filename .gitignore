@@ -1,3 +1,2 @@
-.secrets
-*.secrets.json*
+*.secrets_data.json*
 node_modules

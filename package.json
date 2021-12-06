@@ -7,9 +7,10 @@
     "copy": "copyfiles -f -V build/contracts/*.json ./client/abi/",
     "dev": "lite-server --baseDir='client'",
     "all-dev": "npm run truffle-dev && npm run copy && npm run dev",
+    "all-dev-gui": "npm run truffle-dev-gui && npm run copy && npm run dev",
     "all-prod": "npm run truffle-prod && npm run copy && npm run dev",
-    "test": "echo \"Error: no test specified\" && exit 1",
     "truffle-dev": "truffle compile && truffle migrate --reset --network development",
+    "truffle-dev-gui": "truffle compile && truffle migrate --reset --network developmentgui",
     "truffle-prod": "truffle compile && truffle migrate --reset --network ropsten"
   },
   "author": "",
