@@ -1,9 +1,3 @@
-.vscode/**
-**.vscode/**
-**vscode**
-.vscode/**/* 
-**/.history
-.history/*
-**/.history/*
-*/.history
-*/.history/*
+.secrets
+*.secrets.json*
+node_modules

@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<title>Project</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="icon" href="i/favicon.png" type="image/x-icon">
+	<!-- Google Fonts -->
+	<link
+		href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@100;200;300;400;500;600;700;800;900&family=DM+Sans:wght@100;200;300;400;500;600;700;800;900&display=swap"
+		rel="stylesheet">
+	<!-- Bootstrap 4.5.2 CSS -->
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+		integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+	<!-- Slick 1.8.1 jQuery plugin CSS (Sliders) -->
+	<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
+	<!-- Fancybox 3 jQuery plugin CSS (Open images and video in popup) -->
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+	<!-- AOS 2.3.4 jQuery plugin CSS (Animations) -->
+	<link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+	<!-- FontAwesome CSS -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+	<!-- Startup CSS (Styles for all blocks) - Remove ".min" if you would edit a css code -->
+	<link href="css/style.min.css" rel="stylesheet" />
+	<!-- jQuery 3.5.1 -->
+	<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+	<script type="text/javascript" src="./web3.min.js"></script>
+</head>
+
+<body onload="load()">
+	<!-- Navigation Mobile type 2 -->
+	<div class="navigation_mobile bg-light type2 d-none" data-bg-src="false" data-bg-src-2x="false">
+	</div>
+	<!-- Header 2 -->
+	<header class="pt-190 pb-120 header_2 bg-dark">
+		<nav class="header_menu_2 transparent pt-30 pb-30 mt-20">
+			<div class="container px-xl-0">
+				<div class="row justify-content-between align-items-center">
+					<div class="col-md-4">
+						<a class="link img_link">
+							<img src="i/application_1_logo.png" alt="Escrow Logo" class="img-fluid"
+								srcset="i/application_1_logo@2x.png 2x">
+						</a>
+					</div>
+					<div id="connectRow" class="col-md-6 d-flex justify-content-end align-items-center">
+						<div id="userWallet" class="text-adaptive my-3 mx-35 px-35 f-20 color-white float-left">
+						</div>
+						<a id="connectButton" class="btn sm mx-15 action-2">
+							Connect Wallet
+						</a>
+					</div>
+				</div>
+			</div>
+		</nav>
+		<div class="container">
+			<div class="mb-3 text-center d-block d-xl-none">
+				<a class="link img_link">
+					<img src="i/logo-white.svg" alt="Logo" class="img-fluid">
+				</a>
+			</div>
+			<h1 class="big color-white text-center">
+				Decentralized Escrow
+			</h1>
+			<div class="mw-620 mx-auto mt-35 f-22 color-white op-7 text-adaptive text-center">
+				Connect your wallet, initiate a new escrow transaction, and you're set to go.
+				<br>It's that simple. Period.
+			</div>
+		</div>
+		<div>
+			<!-- <div onload="loadNetwork()" id="loginFirst" hidden="false"
+				class="text-adaptive f-main mw-620 text-center mx-auto mt-35 f-22 color-white">
+				You're connected to <div style="color: green">Ropsten</div>
+			</div> -->
+			<div id="correctNetwork" hidden="true"
+				class="text-adaptive f-main mw-620 text-center mx-auto mt-35 f-22 color-white">
+				You're connected to <div style="color: green">Ropsten</div>
+			</div>
+			<div id="wrongNetwork" hidden="true"
+				class="text-adaptive f-main mw-620 text-center mx-auto mt-35 f-22 color-red">
+				You're connected to the wrong network. Please connect to Ropsten
+			</div>
+			<div id="notCompatible" hidden="true"
+				class="text-adaptive f-main mw-620 text-center mx-auto mt-35 f-22 color-red">
+				Your browser is not compilable, please install MetaMask first.
+			</div>
+		</div>
+	</header>
+	<!-- Navigation Mobile type 2 -->
+	<div class="navigation_mobile bg-light type2">
+	</div>
+	<!-- Header 2 -->
+	<header class="pt-190 pb-120 bg-dark header_2">
+		<div class="container">
+			<!-- <div class="mb-3 text-center d-block d-xl-none">
+							<a class="link img_link">
+								<img src="i/application_1_logo.png" alt="Logo" class="img-fluid" srcset="i/application_1_logo@2x.png 2x">
+							</a>
+						</div> -->
+			<h3 class="big color-white text-center">
+				New Escrow
+			</h3>
+			<div class="mw-620 mx-auto mt-35 f-22 color-white op-7 text-center text-adaptive">
+				Please choose Escrow type, input buyer and seller addresses then input the desired amount
+			</div>
+			<div>
+				<div class="align-self-center mt-35 mb-35 mx-35">
+					<label
+						class="input-control input-toggle border-action-1 mx-35 my-2 px-35 color-white checked-action-3">
+
+						<input id="timeBasedType" type="checkbox" name="time-based-toggle" value="timeBased">
+						<div class="mr-10 w-40 input-control-box radius12 bg-gray">
+
+							<i class="input-control-icon bg-white">
+							</i>
+
+						</div>
+
+						<span class="input-control-label">
+							Time Based Escrow
+						</span>
+
+					</label>
+					<label class="input-control input-toggle border-action-1 checked-action-3">
+
+						<input id="agreementBasedType" type="checkbox" name="agreement-based-toggle"
+							value="agreementBased">
+						<div class="mr-10 w-40 input-control-box radius12 bg-gray">
+
+							<i class="input-control-icon bg-white">
+							</i>
+
+						</div>
+
+						<span class="input-control-label color-white">
+							Agreement based Escrow
+						</span>
+
+					</label>
+				</div>
+				<div>
+					<div class="text-adaptive pb-35 color-white f-20 bold pt-35 my-3 mx-35 px-35">
+						Buyer Address
+						<input id="buyerAddressInput" type="text" name="buyer-address-input"
+							placeholder="Enter Buyer Address Here"
+							class="input color-heading placeholder-heading w-full border-action-2 focus-action-1 sm"
+							required="required">
+					</div>
+					<!-- <input type="text" name="buyer-address-input" placeholder="Buyer Address" class="input color-heading placeholder-heading w-full border-action-2 focus-action-1 sm" required="required"> -->
+				</div>
+				<div>
+					<div class="text-adaptive pb-35 color-white f-20 bold pt-35 my-3 mx-35 px-35">
+						Seller Address
+						<input id="sellerAddressInput" type="text" name="seller-address-input"
+							placeholder="Enter Seller Address Here"
+							class="input color-heading placeholder-heading w-full border-action-2 focus-action-1 sm"
+							required="required">
+					</div>
+					<!-- <input type="text" name="seller-address-input" placeholder="Seller Address" class="input color-heading placeholder-heading w-full border-action-2 focus-action-1 sm" required="required"> -->
+				</div>
+				<div>
+					<div class="text-adaptive pb-35 color-white f-20 bold pt-35 my-3 mx-35 px-35">
+						Amount
+						<input id="amountInput" type="text" name="amount-input"
+							placeholder="Enter Escrow Amount in ETH Here"
+							class="input color-heading placeholder-heading w-full border-action-2 focus-action-1 sm"
+							required="required">
+					</div>
+					<!-- <input type="text" name="amount-input" placeholder="Escrow Amount" class="input color-heading placeholder-heading w-full border-action-2 focus-action-1 sm" required="required"> -->
+				</div>
+				<div>
+					<div class="text-adaptive pb-35 color-white f-20 bold pt-35 my-3 mx-35 px-35">
+						Date
+						<input id="dateInput" type="text" name="date-input" placeholder="Escrow End Date (Unix Epoch)"
+							class="input color-heading placeholder-heading w-full border-action-2 focus-action-1 sm">
+					</div>
+					<!-- <input type="text" name="date-input" placeholder="Escrow End Date (Unix Epoch)" class="input color-heading placeholder-heading w-full border-action-2 focus-action-1 sm" required="required"> -->
+				</div>
+				<a id="createEscrowButton" class="btn lg action-3 my-3 float-right mx-35">
+					Create Escrow
+				</a>
+				<div class="my-3 mx-35 px-35 float-left">
+					<div class="text-adaptive my-3 mx-35 px-35 f-20 color-white float-left">
+						Escrow ID: <div id="getEscrowID"></div>
+						<br>
+					</div>
+				</div>
+			</div>
+		</div>
+	</header>
+	<!-- Navigation Mobile type 2 -->
+	<div class="navigation_mobile bg-light type2">
+	</div>
+	<!-- Header 2 -->
+	<header class="pt-190 pb-120 bg-dark header_2">
+		<div class="container">
+			<h3 class="big color-white text-center">
+				Current Escrow
+			</h3>
+			<div>
+				<div>
+					<div>
+						<input id="crntEscrowID" type="text" name="current-escrow-id"
+							placeholder="Enter your escrow ID here"
+							class="input color-heading placeholder-heading border-action-2 focus-action-2 my-3 px-35 mx-35 ml-35 mr-35 mt-35 mb-35 align-self-center float-left">
+					</div>
+
+					<div>
+						<a id="crntEscrowDetails" class="btn bg-gray text-dark my-1 mx-10">
+							Get Escrow Details
+						</a>
+					</div>
+				</div>
+				<div class="container align-self-center float-right">
+					<div class="container align-self-center float-right">
+						<div id="returnType" class="container align-self-center float-right color-white">
+							Escrow Type:
+						</div>
+						<div id="returnStatus" class="container align-self-center float-right color-white">
+							Escrow Status:
+						</div>
+						<div id="returnBuyerConfirm" class="container align-self-center float-right color-white">
+							Buyer Confirmed:
+						</div>
+						<div id="returnSellerConfirm" class="container align-self-center float-right color-white">
+							Seller Confirmed:
+						</div>
+						<div id="returnBuyerAddress" class="container align-self-center float-right color-white">
+							Buyer:
+						</div>
+						<div id="returnSellerAddress" class="container align-self-center float-right color-white">
+							Seller:
+						</div>
+						<div id="returnWalletAddress"class="container align-self-center float-right color-white">
+							Wallet:
+						</div>
+						<div id="returnEscrowAmount"class="container align-self-center float-right color-white">
+							Escrow Amount:
+						</div>
+						<div id="returnEscrowStart" class="container align-self-center float-right color-white">
+							Escrow Start Date:
+						</div>
+						<div id="returnEscrowEnd" class="container align-self-center float-right color-white">
+							Escrow End Date:
+						</div>
+					</div>
+				</div>
+				<br>
+				<P></P>
+				<div class="container align-self-center float-right">
+					<div class="container align-self-center text-warning float-right color-white">
+						Buyer/Seller Actions
+					</div>
+					<a id="crntEscrowBothConfirm" class="btn action-2 my-1 mx-10">
+						Parties Confirm Escrow
+					</a>
+					<a id="crntEscrowBuyerDeposit" class="btn action-2 my-1 mx-10">
+						Buyer Deposit
+					</a>
+					<a id="crntEscrowBuyerConfirm" class="btn action-2 my-1 mx-10">
+						Buyer Confirm Agreement
+					</a>
+					<a id="crntEscrowSellerWithdraw" class="btn action-2 my-1 mx-10">
+						Seller Withdrawal
+					</a>
+					<a id="crntEscrowBuyerRefund" class="btn action-2 my-1 mx-10">
+						Buyer Refund
+					</a>
+				</div>
+				<br>
+				<div class="container align-self-center float-right my-3 my-1">
+					<div class="container align-self-center text-warning float-right color-white">
+						Admin Actions
+					</div>
+					<a id="crntEscrowBuyerDispute" class="btn my-1 mx-10 action-1 border-action-3">
+
+						Buyer Dispute
+					</a>
+				</div>
+			</div>
+		</div>
+	</header>
+	<!-- Navigation Mobile type 2 -->
+	<div class="navigation_mobile bg-light type2 d-none">
+	</div>
+	<!-- Header 2 -->
+	<header class="pt-190 pb-120 bg-dark header_2">
+		<div class="text-adaptive mw-620 mx-auto text-center pt-1 pr-1 pl-1 pb-1 f-20 color-dribbble">
+			This dApp is Developed by <a href="https://twitter.com/0xBeshoy"><u>Beshoy Shehata</u></a> for the
+			<u>ConsenSys Blockchain Developer Bootcamp</u> Graduation Project
+			<br>Design created using designmodo.com
+		</div>
+	</header>
+	<!-- forms alerts -->
+	<div class="alert alert-success alert-dismissible fixed-top alert-form-success" role="alert">
+		<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+				aria-hidden="true">&times;</span></button>
+		Thanks for your message!
+	</div>
+	<div class="alert alert-warning alert-dismissible fixed-top alert-form-check-fields" role="alert">
+		<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+				aria-hidden="true">&times;</span></button>
+		Please, fill in required fields.
+	</div>
+	<div class="alert alert-danger alert-dismissible fixed-top alert-form-error" role="alert">
+		<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+				aria-hidden="true">&times;</span></button>
+		<div class="message">An error occurred while sending data :( Please, check if your hosting supports PHP and
+			check how to set form data sending <a href="https://designmodo.com/startup/documentation/#form-handler"
+				target="_blank" class="link color-transparent-white">here</a>.</div>
+	</div>
+
+	<!-- gReCaptcha popup (uncomment if you need a recaptcha integration) -->
+	<!--
+		<div class="bg-dark op-8 grecaptcha-overlay"></div>
+		<div class="bg-light radius10 w-350 h-120 px-20 pt-20 pb-20 grecaptcha-popup">
+			<div class="w-full h-full d-flex justify-content-center align-items-center">
+				<div id="g-recaptcha" data-sitekey="PUT_YOUR_SITE_KEY_HERE"></div>
+			</div>
+		</div>
+		<script src="https://www.google.com/recaptcha/api.js?render=explicit" async defer></script>
+		-->
+	<!-- Bootstrap 4.5.2 JS -->
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+	<!-- Fancybox 3 jQuery plugin JS (Open images and video in popup) -->
+	<script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+	<!-- 
+			Google maps JS API 
+			Don't forget to replace the key "AIzaSyDP6Ex5S03nvKZJZSvGXsEAi3X_tFkua4U" to your own! 
+			Learn how to get a key: https://help.designmodo.com/article/startup-google-maps-api/ 
+		-->
+	<!-- Slick 1.8.1 jQuery plugin JS (Sliders) -->
+	<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+	<!-- AOS 2.3.4 jQuery plugin JS (Animations) -->
+	<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+	<!-- Maskedinput jQuery plugin JS (Masks for input fields) -->
+	<script src="js/jquery.maskedinput.min.js"></script>
+	<!-- Startup JS (Custom js for all blocks) -->
+	<!-- <script src="js/scriptt.js"></script> -->
+	<script type="text/javascript" src="./app.js"></script>
+</body>
+
+</html>

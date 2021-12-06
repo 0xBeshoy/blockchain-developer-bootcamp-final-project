@@ -1,0 +1,26 @@
+{
+  "name": "escrow",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "copy": "copyfiles -f -V build/contracts/*.json ./client/abi/",
+    "dev": "lite-server --baseDir='client'",
+    "all-dev": "npm run truffle-dev && npm run copy && npm run dev",
+    "all-prod": "npm run truffle-prod && npm run copy && npm run dev",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "truffle-dev": "truffle compile && truffle migrate --reset --network development",
+    "truffle-prod": "truffle compile && truffle migrate --reset --network ropsten"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "copyfiles": "^2.4.1",
+    "lite-server": "^2.6.1"
+  },
+  "dependencies": {
+    "@openzeppelin/contracts": "^4.3.3",
+    "@truffle/hdwallet-provider": "^1.7.0",
+    "web3": "^1.6.1"
+  }
+}
