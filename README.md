@@ -8,7 +8,7 @@
 
 
 ## Public Address for Certification NFT:
-```json
+```
  0xc2615ad6938235dEb58aA48515727F1d0Ce598E6 
  ```
 
@@ -17,9 +17,9 @@
 ## Local Development:
 
 ### Prerequisites: 
-* Nodejs
-* Truffle
-* Ganache
+* Nodejs v16.13.0
+* Truffle v5.4.16
+* Ganache v6.12.2 (ganache-core: 2.13.2)
 
 ### Local Deployment Flow: 
 
@@ -45,8 +45,8 @@ The decentralized escrow dapp allows two parties to have a trustless escrow tran
 - In case of time base escrow type, the agreed on period have to pass first for the seller to be able to withdraw their funds.
   
 ### Deployed Contract Address (ropsten):
-```json
-0xF26c2DDB69fAAFBD29e0F804633796a10d2DC7f2
+```
+0xC9B044F9C0a0850D5F58a19341091451e51222fB
 ```
 
 ### User Interaction Flow: 
